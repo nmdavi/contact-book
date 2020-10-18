@@ -1,34 +1,4 @@
-.tb{
-    text-align: center;
-    margin-top: 10px;
-    width: 50%;
-    border-collapse: collapse;
-    border-spacing: 2px;
-    font-size: large;
-}
-
-.tbhead{
-    width: 50%;
-
-}
-
-.tbbody{
-width: 50%;
-}
-
-.tbrow{
-    display: flexbox;
-    vertical-align: top;
-    border-color: transparent;
-}
-
-.tbbd{
-    border: {
-        size: 4px;
-        color: rgb(240, 236, 236);
-        style: solid;
-    }
-}
+@import '../../assets/css/table.scss';
 
 .alt{
     position: absolute;
