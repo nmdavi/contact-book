@@ -1,0 +1,29 @@
+.app-header {
+    text-align: center;
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.logo-header{
+    margin-top: 15px;
+}
+
+.link-header{
+    text-decoration: none;
+    color: white;
+    margin: 0px 10px 0px 10px;
+}
+
+.link-header:hover{
+    color: aqua;
+}
+
+.active{
+    color: aqua;
+}
+
+.menu{
+}
