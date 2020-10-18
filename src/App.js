@@ -18,7 +18,20 @@ function App() {
       <Router>
         <Header>
           <NavLink exact to="/" className='link-header' activeClassName='active'>Home</NavLink>
-          {user ? <NavLink to="/profile" className='link-header' activeClassName='active'>Profile</NavLink> : <>(<NavLink to="/login" className='link-header' activeClassName='active'>Login</NavLink> <NavLink to="/register" className='link-header' activeClassName='active'>Register</NavLink>)</>}
+          {
+            user ?
+              <>
+                <NavLink to="/profile" className='link-header' activeClassName='active'>Profile</NavLink>
+                <NavLink to="/logoff" className='link-header' activeClassName='active'>Logoff</NavLink>
+              </>
+              :
+              <>
+                (
+                  <NavLink to="/login" className='link-header' activeClassName='active'>Login</NavLink>
+                <NavLink to="/register" className='link-header' activeClassName='active'>Register</NavLink>
+                )
+              </>
+          }
         </Header >
 
         <Switch>

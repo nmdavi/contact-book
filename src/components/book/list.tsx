@@ -78,33 +78,35 @@ class List extends Component<any, IState> {
         const { showAddEdit, contact, contacts } = this.state
 
         return (
-            <div>
-                <table className="tb center">
-                    <thead className="tbhead">
-                        <tr>
-                            <th className="tbbd">Name</th>
-                            <th className="tbbd">Telephone</th>
-                            <th className="tbbd"></th>
-                            <th className="tbbd"></th>
-                        </tr>
-                    </thead>
-                    <tbody className="tbbody">
-                        {
-                            contacts.map((contact: IBook) =>
-                                <tr className="tbrow" key={contact.id}>
-                                    <td className="tbbd">{contact.name}</td>
-                                    <td className="tbbd">{contact.telephone}</td>
-                                    <td className="tbbd"><button type="submit" onClick={() => this.removeContact(contact)} className="bt bt-medium">Remove</button></td>
-                                    <td className="tbbd"><button type="submit" onClick={() => this.changeContact(contact)} className="bt bt-medium">Change</button></td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
+            <>
+                <div className="tb-m">
+                    <table className="tb center">
+                        <thead className="tbhead">
+                            <tr>
+                                <th className="tbbd">Name</th>
+                                <th className="tbbd">Telephone</th>
+                                <th className="tbbd"></th>
+                                <th className="tbbd"></th>
+                            </tr>
+                        </thead>
+                        <tbody className="tbbody">
+                            {
+                                contacts.map((contact: IBook) =>
+                                    <tr className="tbrow" key={contact.id}>
+                                        <td className="tbbd">{contact.name}</td>
+                                        <td className="tbbd">{contact.telephone}</td>
+                                        <td className="tbbd"><button type="submit" onClick={() => this.removeContact(contact)} className="bt bt-medium">Remove</button></td>
+                                        <td className="tbbd"><button type="submit" onClick={() => this.changeContact(contact)} className="bt bt-medium">Change</button></td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
                 {showAddEdit && <AddEdit contact={contact} bookSubmit={this.bookSubmit} changeContact={this.changeContact} />}
 
-            </div>
+            </>
         )
     }
 }
