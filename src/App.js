@@ -6,7 +6,7 @@ import Logout from './components/login/logout'
 import Book from './components/book/book'
 import Profile from './components/profile/profile'
 import {
-  BrowserRouter as Router, Switch, Route, NavLink
+  BrowserRouter as Router, Switch, Route, NavLink, Redirect
 } from 'react-router-dom';
 import * as ROUTE from './const/route'
 import * as AUTH from './const/auth'
@@ -23,6 +23,7 @@ function App() {
           {
             user ?
               <>
+                <Redirect to="/" className='link-header' activeClassName='active' />
                 <NavLink exact to="/" className='link-header' activeClassName='active'>Home</NavLink>
                 <NavLink to="/profile" className='link-header' activeClassName='active'>Profile</NavLink>
                 <NavLink to="/logout" className='link-header' activeClassName='active' onClick={() => AUTH.logout()}>Logout</NavLink>
@@ -30,7 +31,8 @@ function App() {
               :
               <>
                 (
-                  <NavLink to="/login" className='link-header' activeClassName='active'>Login</NavLink>
+                <Redirect to="/login" className='link-header' activeClassName='active' />
+                <NavLink to="/login" className='link-header' activeClassName='active'>Login</NavLink>
                 <NavLink to="/register" className='link-header' activeClassName='active'>Register</NavLink>
                 )
               </>

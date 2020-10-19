@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import InputMask from "react-input-mask";
 import IBook from './interface/ibook';
 
 interface IProp {
@@ -26,7 +27,7 @@ class AddEdit extends Component<IProp, IState> {
     }
 
     componentDidMount() {
-        const contact = this.props.contact
+        const contact = this.props.contact ? this.props.contact : { id: 0, name: '', telephone: '' }
 
         this.setState({
             id: contact.id,
@@ -52,11 +53,12 @@ class AddEdit extends Component<IProp, IState> {
                         <input type="hidden" name="id" value={id} onChange={this.bookChange} />
                         <div className="m1">
                             <label htmlFor="name" className="lbl">Name</label>
-                            <input type="text" name="name" value={name} onChange={this.bookChange} className="in" />
+                            <input type="text" name="name" value={name} onChange={this.bookChange} className="in" required />
                         </div>
                         <div className="m1">
                             <label htmlFor="telephone" className="lbl">Telephone</label>
-                            <input type="tel" name="telephone" value={telephone} onChange={this.bookChange} className="in" />
+                            {<InputMask name="telephone" value={telephone} onChange={this.bookChange} className="in" mask="(99) 9999-9999" required />
+                            }
                         </div>
                         <div className="m1">
                             <input type="submit" value="Save" className="bt bt-large" />
