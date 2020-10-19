@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ILogin from './interface/ilogin'
 import './login.scss'
+import * as AUTH from '../../const/auth'
 interface IState extends ILogin { }
 
 
@@ -21,8 +22,8 @@ class Login extends Component<any, IState> {
     }
 
     login(event: any) {
-        const target = event.target
-        localStorage.setItem('lg', target.email + "/" + target.password)
+        const { email, password } = event.target
+        AUTH.login('email:' + email.value)
     }
 
     render() {

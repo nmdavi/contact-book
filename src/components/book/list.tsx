@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import IBook from './interface/ibook';
-import AddEdit from './addEdit';
+import React, { Component } from 'react'
+import IBook from './interface/ibook'
+import AddEdit from './addEdit'
+import * as AUTH from '../../const/auth'
 
 interface IState {
     showAddEdit: boolean,
@@ -76,6 +77,7 @@ class List extends Component<any, IState> {
 
     render() {
         const { showAddEdit, contact, contacts } = this.state
+        const user = AUTH.isAuthenticated() ? '' : 'hid'
 
         return (
             <>
@@ -85,8 +87,8 @@ class List extends Component<any, IState> {
                             <tr>
                                 <th className="tbbd">Name</th>
                                 <th className="tbbd">Telephone</th>
-                                <th className="tbbd"></th>
-                                <th className="tbbd"></th>
+                                <th className={`tbbd ${user}`}></th>
+                                <th className={`tbbd ${user}`}></th>
                             </tr>
                         </thead>
                         <tbody className="tbbody">
@@ -95,16 +97,17 @@ class List extends Component<any, IState> {
                                     <tr className="tbrow" key={contact.id}>
                                         <td className="tbbd">{contact.name}</td>
                                         <td className="tbbd">{contact.telephone}</td>
-                                        <td className="tbbd"><button type="submit" onClick={() => this.removeContact(contact)} className="bt bt-medium">Remove</button></td>
-                                        <td className="tbbd"><button type="submit" onClick={() => this.changeContact(contact)} className="bt bt-medium">Change</button></td>
+                                        <td className={`tbbd ${user}`}><button type="submit" onClick={() => this.removeContact(contact)} className="bt bt-medium" >Remove</button></td>
+                                        <td className={`tbbd ${user}`}><button type="submit" onClick={() => this.changeContact(contact)} className="bt bt-medium" >Change</button></td>
                                     </tr>
                                 )
                             }
                         </tbody>
                     </table>
-                </div>
+                </div >
 
-                {showAddEdit && <AddEdit contact={contact} bookSubmit={this.bookSubmit} changeContact={this.changeContact} />}
+                { showAddEdit && <AddEdit contact={contact} bookSubmit={this.bookSubmit} changeContact={this.changeContact} />
+                }
 
             </>
         )
