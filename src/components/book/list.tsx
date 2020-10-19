@@ -22,14 +22,14 @@ class List extends Component<any, IState> {
             },
             contacts: [
                 {
-                    id: 0,
+                    id: 1,
                     name: 'Jonh Doe',
-                    telephone: '12955224466'
+                    telephone: '(10) 9999-8888'
                 },
                 {
-                    id: 10,
+                    id: 2,
                     name: 'Doe Jonh',
-                    telephone: '12988552233'
+                    telephone: '(10) 4444-2222'
                 }
             ]
         }
@@ -46,6 +46,13 @@ class List extends Component<any, IState> {
         }))
     }
 
+    addContact = (contact: IBook): void => {
+        this.setState((state) => ({
+            showAddEdit: !state.showAddEdit,
+            contacts: [...state.contacts, contact]
+        }))
+    }
+
     removeContact = (contact: IBook): void => {
         const id = contact.id
         const contacts = this.state.contacts.filter((x) => x.id !== id)
@@ -58,21 +65,29 @@ class List extends Component<any, IState> {
     bookSubmit = (event: any): void => {
         event.preventDefault();
 
-        const target = event.target
-        let index = Number.NaN
-        let contacts = this.state.contacts
+        const { id, name, telephone } = event.target
+        const contact: IBook = { id: id.value, name: name.value, telephone: telephone.value }
+        const contacts = this.state.contacts
 
-        this.state.contacts.filter((x, i) => {
-            index = x.id.toString() === target.id.value ? i : 0
-        })
+        if (contact.id != 0) {
+            let index = Number.NaN
 
-        console.log(index)
-        contacts[index].name = target.name.value
-        contacts[index].telephone = target.telephone.value
+            contacts.filter((x, i) => {
+                index = x.id.toString() === contact.id.toString() ? i : 0
+            })
 
-        this.setState({
-            contacts: contacts
-        })
+            contacts[index].name = contact.name
+            contacts[index].telephone = contact.telephone
+
+            this.setState((state) => ({
+                showAddEdit: !state.showAddEdit,
+                contacts: contacts
+            }))
+        }
+        else {
+            contact.id = contacts.length + 1
+            this.addContact(contact)
+        }
     }
 
     render() {
@@ -82,6 +97,7 @@ class List extends Component<any, IState> {
         return (
             <>
                 <div className="tb-m">
+                    <button type="submit" onClick={() => this.changeContact({ id: 0, name: '', telephone: '' })} className="bt bt-medium ad" >Adicionar</button>
                     <table className="tb center">
                         <thead className="tbhead">
                             <tr>
@@ -106,9 +122,7 @@ class List extends Component<any, IState> {
                     </table>
                 </div >
 
-                { showAddEdit && <AddEdit contact={contact} bookSubmit={this.bookSubmit} changeContact={this.changeContact} />
-                }
-
+                { showAddEdit && <AddEdit contact={contact} bookSubmit={this.bookSubmit} changeContact={this.changeContact} />}
             </>
         )
     }
